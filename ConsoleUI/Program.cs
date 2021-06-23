@@ -13,8 +13,8 @@ namespace ConsoleUI
         public static int min = 1000;
         public static int max = 9999;
         private static int raffleNumber;
-        private static Random _rdm = new Random();
         private static Random randomNumber = new Random();
+
 
         static string GetUserInput(string question)
         {
@@ -24,37 +24,73 @@ namespace ConsoleUI
             return input;
         }
 
-        static void GetUserInfo()
+/*        static void GetUserInfo()
         {
             string name;
             string otherGuest;
-            List<string> names = new List<string> { };
+            List<string> names = new List<string> {};
 
             do
             {
                 name = GetUserInput("Please enter your name.");
                 otherGuest = (GetUserInput("Do you want to add any other names? Please input 'yes' or 'no.'").ToLower());
                 names.Add(name);
+
             }
             while (otherGuest == "yes");
-
 
             foreach (string nameName in names)
             {
                 Console.WriteLine(nameName);
             }
         }
+*/
+        static void GetUserInfo()
+        {
+            string name;
+            string otherGuest;
 
-     
+            do
+            {
+                name = GetUserInput("Please enter your name.");
+                otherGuest = (GetUserInput("Do you want to add any other names? Please input 'yes' or 'no.'").ToLower());
+                raffleNumber = RandomNumber();
+                guests.Add(raffleNumber, name);
+            }
+            while (otherGuest == "yes");
+
+            foreach (var numAndName in guests)
+            {
+                Console.WriteLine($"{numAndName.Key} : {numAndName.Value}");
+            }
+        }
+
+/*        static void GetRaffleNumber(Dictionary<int, string> dict)
+        {
+            dict = guests;
+
+        }*/
+            
         public static int RandomNumber(int min = 1000, int max = 9999)
         {
             return randomNumber.Next(min, max);
         }
+
+/*        public static void AddGuestsInRaffle(int raffleNumber, string guest)
+        {
+            raffleNumber = RandomNumber();
+            foreach (string person in names)
+            {
+                guests.Add(raffleNumber, person);
+            }
+        }*/
+
+
+
         static void Main(string[] args)
         {
 
-            Console.WriteLine(RandomNumber());
-
+            GetUserInfo();
 
         }
 
