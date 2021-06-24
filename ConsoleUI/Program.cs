@@ -25,27 +25,7 @@ namespace ConsoleUI
             return input;
         }
 
-/*        static void GetUserInfo()
-        {
-            string name;
-            string otherGuest;
-            List<string> names = new List<string> {};
 
-            do
-            {
-                name = GetUserInput("Please enter your name.");
-                otherGuest = (GetUserInput("Do you want to add any other names? Please input 'yes' or 'no.'").ToLower());
-                names.Add(name);
-
-            }
-            while (otherGuest == "yes");
-
-            foreach (string nameName in names)
-            {
-                Console.WriteLine(nameName);
-            }
-        }
-*/
         static void GetUserInfo()
         {
             string name;
@@ -65,21 +45,13 @@ namespace ConsoleUI
             foreach (var numAndName in guests)
             {
                 Console.WriteLine($"{numAndName.Key} : {numAndName.Value}");
-            }
-            
+            }            
         }
 
-        public static int RandomNumber(int min = 1000, int max = 9999)
+        static int RandomNumber(int min = 1000, int max = 9999)
         {
             return randomNumber.Next(min, max);
         }
-
-        /*        static int GetRaffleNumber(Dictionary<int, string> dict)
-                {
-                    dict = guests;
-                    int maxKey = guests.Keys.Max();
-                    return maxKey;
-                }*/
 
         static void PrintGuestsName()
         {
@@ -98,7 +70,6 @@ namespace ConsoleUI
             int index = winner.Next(guests.Count);
             KeyValuePair<int, string> pair = guests.ElementAt(index);
             Console.WriteLine($"The Winner is: {pair.Key} with {pair.Value}!! Congrats!");
-
         }
 
 
@@ -106,7 +77,6 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-
             {
                 Console.WriteLine("Welcome to the Party!!");
                 GetUserInfo();
@@ -114,13 +84,7 @@ namespace ConsoleUI
                 PrintWinner();
 
             }
-
-
-
         }
-
-        //Start writing your code here
-
 
 
 
