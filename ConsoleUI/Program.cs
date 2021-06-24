@@ -14,6 +14,7 @@ namespace ConsoleUI
         public static int max = 9999;
         private static int raffleNumber;
         private static Random randomNumber = new Random();
+        private static Random winner = new Random();
 
 
         static string GetUserInput(string question)
@@ -53,11 +54,38 @@ namespace ConsoleUI
             do
             {
                 name = GetUserInput("Please enter your name.");
-                otherGuest = (GetUserInput("Do you want to add any other names? Please input 'yes' or 'no.'").ToLower());
+                otherGuest = (GetUserInput("Do you want to add any other names? Please input 'yes' if so.").ToLower());
                 raffleNumber = RandomNumber();
                 guests.Add(raffleNumber, name);
             }
             while (otherGuest == "yes");
+            
+/*            MultiLineAnimation();*/
+            
+            foreach (var numAndName in guests)
+            {
+                Console.WriteLine($"{numAndName.Key} : {numAndName.Value}");
+            }
+            
+        }
+
+        public static int RandomNumber(int min = 1000, int max = 9999)
+        {
+            return randomNumber.Next(min, max);
+        }
+
+        /*        static int GetRaffleNumber(Dictionary<int, string> dict)
+                {
+                    dict = guests;
+                    int maxKey = guests.Keys.Max();
+                    return maxKey;
+                }*/
+
+        static void PrintGuestsName()
+        {
+            Console.WriteLine("Press any key when you're ready to know the winner!");
+            Console.ReadKey();
+            MultiLineAnimation();
 
             foreach (var numAndName in guests)
             {
@@ -65,45 +93,38 @@ namespace ConsoleUI
             }
         }
 
-/*        static void GetRaffleNumber(Dictionary<int, string> dict)
+        static void PrintWinner()
         {
-            dict = guests;
+            int index = winner.Next(guests.Count);
+            KeyValuePair<int, string> pair = guests.ElementAt(index);
+            Console.WriteLine($"The Winner is: {pair.Key} with {pair.Value}!! Congrats!");
 
-        }*/
-            
-        public static int RandomNumber(int min = 1000, int max = 9999)
-        {
-            return randomNumber.Next(min, max);
         }
 
-/*        public static void AddGuestsInRaffle(int raffleNumber, string guest)
-        {
-            raffleNumber = RandomNumber();
-            foreach (string person in names)
-            {
-                guests.Add(raffleNumber, person);
-            }
-        }*/
 
 
 
         static void Main(string[] args)
         {
 
-            GetUserInfo();
+            {
+                Console.WriteLine("Welcome to the Party!!");
+                GetUserInfo();
+                PrintGuestsName();
+                PrintWinner();
+
+            }
+
+
 
         }
 
         //Start writing your code here
 
 
-        //I need this code to recycle the questions
-        // but it's only asking once, and then it keeps printing the asnwers input the first time.
-        //
 
 
-
-/*        static void MultiLineAnimation() // Credit: https://www.michalbialecki.com/2018/05/25/how-to-make-you-console-app-look-cool/
+        static void MultiLineAnimation() // Credit: https://www.michalbialecki.com/2018/05/25/how-to-make-you-console-app-look-cool/
         {
             var counter = 0;
             for (int i = 0; i < 30; i++)
@@ -149,6 +170,18 @@ namespace ConsoleUI
                 counter++;
                 Thread.Sleep(200);
             }
-        }*/
+        }
     }
 }
+
+
+
+
+
+//how to return max w/in an array
+/*        static int GetRaffleNumber(Dictionary<int, string> dict)
+        {
+            dict = guests;
+            int maxKey = guests.Keys.Max();
+            return maxKey;
+        }*/
